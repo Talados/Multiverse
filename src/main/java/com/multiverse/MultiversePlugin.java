@@ -39,6 +39,7 @@ public class MultiversePlugin extends Plugin
 
 	private MultiverseWebSocketListener listener;
 	private String currentRealm;
+	private String websocketServer = "139.162.135.91:7071";
 	private String currentlyLoggedInAccount;
 	private boolean previouslyLoggedIn;
 	private OkHttpClient okClient;
@@ -170,7 +171,7 @@ public class MultiversePlugin extends Plugin
 
 		okClient = new OkHttpClient();
 
-		Request request = new Request.Builder().url(String.format("ws://localhost:7071/ws?platform=plugin&name=%s&realm=%s",displayName,realm)).build();
+		Request request = new Request.Builder().url(String.format("ws://%s/ws?platform=plugin&name=%s&realm=%s",websocketServer,displayName,realm)).build();
 		listener = new MultiverseWebSocketListener(modIconsStart, client, clientThread);
 
 		ws = okClient.newWebSocket(request, listener);
